@@ -17,8 +17,8 @@ type Grid = [[Cell]]
 -}
 randomCell :: IO Cell
 randomCell = do
-  cellState <- randomRIO (0, 1) :: IO Int
-  return (if cellState == 0 then Dead else Alive)
+    cellState <- randomRIO (0, 1) :: IO Int
+    return (if cellState == 0 then Dead else Alive)
 
 
 
@@ -84,15 +84,15 @@ aStep grid = [[nextCellState (grid !! x !! y) (neighbours grid (x, y))
 -}
 runSimulation :: Grid -> Int -> IO ()
 runSimulation grid counter = do
-  clearScreen
-  setCursorPosition 0 0 -- Make Game of Life stay in the same place in terminal
-  putStrLn ""
-  putStrLn $ "Current State: " ++ show counter
-  putStrLn "--> Press enter to move on next state, Ctrl+C to exit <--"
-  putStrLn ""
-  putStrLn $ showGrid grid
-  _ <- getLine -- Discard user input, waitng for Enter being pressed only
-  runSimulation (aStep grid) (counter + 1)
+    clearScreen
+    setCursorPosition 0 0 -- Make the Grid stay in the same place in terminal
+    putStrLn ""
+    putStrLn $ "Current State: " ++ show counter
+    putStrLn "--> Press enter to move on next state, Ctrl+C to exit <--"
+    putStrLn ""
+    putStrLn $ showGrid grid
+    _ <- getLine -- Discard user input, waitng for Enter being pressed only
+    runSimulation (aStep grid) (counter + 1)
 
 
 
